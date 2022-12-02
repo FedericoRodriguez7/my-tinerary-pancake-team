@@ -1,0 +1,25 @@
+
+.cities-container123333{
+    
+    display: flex;
+    flex-wrap: wrap;
+    min-height: 100vh;
+    
+}
+
+
+.CONTENEDOR-PADRRES123213213{
+    
+    background-color: #3E78B2;
+    min-height: 100vh;
+}
+
+
+.MYcities123213{
+    
+    height: 30rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2cm;
+}

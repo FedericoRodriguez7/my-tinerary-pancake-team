@@ -1,98 +1,105 @@
 import React from 'react'
+import { useRef } from 'react'
 import './CompSignUp.css'
-import FormSignUp from '../FomSignUp/FormSignUp'
-import GoogleButton from '../GoogleButton/GoogleButton'
-import {useState, useEffect} from 'react'
+import Inputs from '../inputs/Inputs'
+import BotonEnviar from "../BotonEnviar/BotonEnviar"
+import BotonPruebaGoogle from '../BotonPruebaGoogle/BotonPruebaGoogle'
+import Swal from 'sweetalert2'
+import axios from 'axios'
+import { BASE_URL } from '../../api/url'
 
-export function CompSignUp() {
+export default function CompSignUp() {
 
-  const registor = () => {
-    let dataR = localStorage.getItem("registration");
-    if(dataR){
-        return JSON.stringify(dataR);
-    } else{ 
-      return [];
-  }
+
+const form = useRef()
+const name = useRef()
+const lastName = useRef()
+const photo = useRef()
+const age = useRef()
+const email = useRef()
+const password = useRef()
+const confirmPassword = useRef()
+
+function enviarFormulario(event) {
+    event.preventDefault()
+    if (password.current.value === confirmPassword.current.value) {
+        let newUser = {
+            name: name.current.value,
+            lastName: lastName.current.value,
+            photo: photo.current.value,
+            age: age.current.value,
+            email: email.current.value,
+            password: password.current.value,
+        }
+        Swal.fire({
+            icon: 'info',
+            title: `${newUser.name} ${newUser.lastName} Do you want to register with this information?`,
+            showConfirmButton: true,
+            showCancelButton: true,
+        })
+            .then(async result => {
+                if (result.isConfirmed) {
+                    let response = await axios.post(`${BASE_URL}/api/auth/sign-up`, newUser)
+                    if (response.data.success) {
+                        Swal.fire({
+                            title: 'Success!',
+                            text: `${newUser.name} your account was created successfully. Please check your mailbox ( ${newUser.email} ) and confirm your registration.`,
+                            icon: 'success',
+                            confirmButtonText: 'Ok'
+                        })
+                        form.current.reset()
+                    }
+                }
+            })
+            .catch(error => {
+                if(Array.isArray(error.response.data.message)){
+                    Swal.fire({
+                        icon: "error",
+                        title: error.response.data.message.join(' <br> '),
+                        showConfirmButton: true,
+                    });
+                }else{
+                    Swal.fire({
+                        icon: "error",
+                        title: error.response.data.message,
+                        showConfirmButton: true,
+                    });
+                }
+            })
+    } else {
+
+        Swal.fire({
+            icon: 'error',
+            title: 'Something went wrong',
+            text: 'Passwords do not match!',
+        })
+    }
+
 }
-
-
-const [registration, setRegistration] = useState ("");
-const [name, setName] = useState("");
-const [surName, setSurName] = useState("");
-const [user, setUser] = useState("");
-const [mobileNumber, setMobileNumber] = useState("");
-const [email, setEmail] = useState("");
-const [password, setPassword] = useState("");
-
-
-const FormularioLimpio = () => {
-    setName("");
-    setSurName("");
-    setUser("");
-    setMobileNumber("");
-    setEmail("");
-    setPassword("");
-    
-    window.location.replace('./index');
-}
-// HandleSubmit will receive the form data if form validation is successful.
-//PreventDefault is called on the event when submitting the form to prevent a browser reload/refresh.
-/// ... argument list
-const handleSubmit = (e) => {
-    e.preventDefault();
-    let myObject = { name,surName,user,mobileNumber,email,password }
-    setRegistration([...registration, myObject]);
-    FormularioLimpio();
-
-};
-
-
-
-//Dates's Petition
-
-useEffect(() =>{
-    localStorage.setItem("register", JSON.stringify(registration));
-    
-});
-
-
-
 
   return (
       <div className='signup-container'>
           <div className='card-signup'>
           <h3>Sign Up!</h3>
-          <div className='google-button'>
-              <p>Continue with Google</p>
-              <img src="https://rotulosmatesanz.com/wp-content/uploads/2017/09/2000px-Google_G_Logo.svg_.png" alt="" />
-             
-          </div>
+          
   
           <div className='form-signin'>
-      <form onSubmit={handleSubmit} action="">
-      <label htmlFor="name">Name</label>
-      <input type="text" placeholder='Enter Name' onChange={(e) => setName(e.target.value)} />
-  
-      <label htmlFor="surname">Surname</label>
-      <input type="text" placeholder='Enter Surname' onChange={(e) => setSurName(e.target.value)} />
-  
-      <label htmlFor="mail">Mail</label>
-      <input type="text" placeholder='Enter Mail' onChange={(e) => setEmail(e.target.value)} />
-          
-      <label htmlFor="tel">Tel</label>
-      <input type="text" placeholder='Enter Tel' onChange={(e) => setMobileNumber(e.target.value)} />
-          
-      <label htmlFor="username">User</label>
-                  <input type="text" placeholder='Enter User Name' id='usernamejs' onChange={(e) => setUser(e.target.value)}/>
-  
-                  <label htmlFor="password">Password</label>
-      <input type="password" placeholder='Enter Password' onChange={(e) => setPassword(e.target.value)} />
-  
-      <input type="submit" value='Submit' />
-  
+      <form ref={form}>
+      <Inputs classN="signup-input" type="text" place="Name" id="name" refId={name} />
+                            <Inputs classN="signup-input" type="text" place="LastName" id="lastName" refId={lastName} />
+                            <Inputs classN="signup-input" type="text" place="Photo" id="photo" refId={photo} />
+                            <Inputs classN="signup-input" type="number" place="Age" id="age" refId={age} />
+                            <Inputs classN="signup-input" type="email" place="Email" id="email" refId={email} />
+                            <Inputs classN="signup-input" type="password" place="Password" id="password" refId={password} />
+                            <Inputs classN="signup-input" type="password" place="Confirm Password" id="confirmPassword" refId={confirmPassword} />
       </form>
   </div>
-         
+  <div className='bottonregistrarse1234123'>
+  <BotonEnviar fx={enviarFormulario} texto='Sign Up' />
+  </div>
+  <div className='botongoogle123213'>
+                        <BotonPruebaGoogle texto='Sign up with Google' url='https://accounts.google.com/v3/signin/identifier?dsh=S-1341219122%3A1667751252859917&continue=https%3A%2F%2Fwww.google.com%2F%3Fgws_rd%3Dssl&ec=GAZAmgQ&hl=es-419&passive=true&flowName=GlifWebSignIn&flowEntry=ServiceLogin&ifkv=ARgdvAt_thDvZZDycyZfT6GZJJ27KpLLjV92H1YwhHxFL1XG0rjrjh3BfVulpJ6CADzp2VCsgYHudQ' />
+         </div>
           </div>
       </div>
     )

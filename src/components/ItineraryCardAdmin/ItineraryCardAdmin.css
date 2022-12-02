@@ -1,0 +1,28 @@
+.card-container678345234234{
+    background-color: #004BA8;
+    width: 18rem;
+    height: 30rem;
+display: flex;
+flex-direction: column;
+}
+
+
+.card-container678345234234 img{
+
+    height: 100%;
+width: 100%;
+}
+
+
+.botonesreadyup{
+    
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 9rem;
+}
+
+.botonesreadyup button{
+    height: 40px;
+    width: 70px;
+}

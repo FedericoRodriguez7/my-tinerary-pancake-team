@@ -11,9 +11,9 @@
 }, {
 
     "id": "it2",
-    "cityId": "citi1",
+    "cityId": "city1",
     "name": "White Night 2022",
-    "photo": "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.pariszigzag.fr%2Fparis-au-quotidien%2Fla-nuit-blanche-sera-decalee-en-juin-des-2023&psig=AOvVaw0JNGkWSJv5kdi73ZzuxQb6&ust=1667511562454000&source=images&cd=vfe&ved=0CA0QjRxqFwoTCMijuei6kPsCFQAAAAAdAAAAABAD",
+    "photo": "https://www.pariszigzag.fr/wp-content/uploads/2019/10/nuit-blanche-2019-paris-zigzag.jpg",
     "description": "This unmissable event in the cultural life of the capital invites Parisians and tourists alike to walk around and discover works by national and international artists, free of charge.",
     "price": "Free",
     "duration": "All night",

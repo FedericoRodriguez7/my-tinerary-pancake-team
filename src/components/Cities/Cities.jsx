@@ -1,91 +1,94 @@
 import './Cities.css'
-import CardCity from '../CardCity/CardCity'
-import dataCities from '../../dataCities'
-import { useState, useEffect, useCallback } from 'react';
+import Checkbox from '../CheckBox/Checkbox';
+import CityCard from '../CityCard/CityCard';
+import { useState, useEffect, useCallback , useRef } from 'react';
 
 
 export default function ComponentesCities() {
 
   let [ciudades, setCiudades] = useState([])
+  let [ciudadesFiltradas, setCiudadesFiltradas] = useState([])
 
-useEffect(()=> {
-  fetch('./dataCities.json')
-.then(res=>res.json())
+  let [checks, setChecks] = useState([])
+  const searchId = useRef()
 
-.then(res=> setCiudades(res))
-},[])
-console.log(ciudades)
+  useEffect(() => {
+    fetch('../cities.json')
+        .then(response => response.json())
+        .then(response => setCiudades(response))
+    fetch('../cities.json')
+        .then(response => response.json())
+        .then(response => setCiudadesFiltradas(response))
+}, [])
 
-let [checked, setChecked] = useState([])
+let checkCiudades = [...new Set(ciudades.map((ciudad) => ciudad.continent))]
 
-  
-   const [query, setQuery] = useState('');
-console.log(query)
+function filterCheckCards(event) {
+  let checkFiltered = filterCheck(event)
+        localStorage.setItem('checkboxFiltrados', JSON.stringify(checkFiltered))
+        let searchFiltered = filterSearch(checkFiltered)
+        localStorage.setItem('searchFiltrados', JSON.stringify(searchFiltered))
+        setCiudadesFiltradas(searchFiltered)
+        console.log(searchFiltered)
+        localStorage.setItem('ciudadesFiltradas', JSON.stringify(searchFiltered))
+    }
 
+    function filterCheck(event) {
+      let checkFiltered = checks
+      if(event.target.checked) {
+          checkFiltered =  [...checks, event.target.name]
+      } else {
+          checkFiltered = checks.filter((check) => check !== event.target.name)
+          console.log(checks)
+      }
 
-let checkHandler = (e) => {
-  let auxArray = [...checked]
-  if(e.target.checked){
-      auxArray.push(e.target.value)
-  }else{
-      auxArray = auxArray.filter(a => a !== e.target.value)
-  }
-  setChecked(auxArray)
-  console.log(auxArray);
+      let ciudadesFiltradas = ciudades.filter((ciudad) => checkFiltered.includes(ciudad.continent))
+
+      setChecks(checkFiltered)
+
+      if (checkFiltered.length === 0) {
+        return ciudades
+    }
+
+    return ciudadesFiltradas
 }
 
-
-    return (
-
-<>
-<div className='CitiesMod'>
-  
-    <div className='ContenedorDeFiltros' >
-      <div className='tilte-cities'>
-      <h2>CITIES</h2>
-      </div>
-        <div  className='FiltrosDis'  >
-          <div className='contenedor-checkbox'>
-            <div className="Filtro1-checkbox">
-              <input  type="checkbox" onClick={checkHandler} id="ch1"  value="America" />America
-            </div>
-        
-            <div className="Filtro1-checkbox">
-              <input type="checkbox" onClick={checkHandler} id="ch2"  value="Europe"  />Europe
-            </div>
-            <div className="Filtro1-checkbox">
-              <input type="checkbox" onClick={checkHandler} id="ch2"  value="Asia"  />Asia
-            </div>
-          </div>
-     
-          <div className='Searchbar-filtro2'>
-            <input onChange={(e) => setQuery(e.target.value)} type="search" id="site-search" name="Search" placeholder='City...'>
-            </input>
-
-
-
-          </div>
-      </div>
-    </div>
-
-<div className='ContenedorCards'>
-    
-    
-    
-{ciudades.filter((user)=>user.name.toLowerCase().includes(query)).map((cadaPerfil,id)=><CardCity key={id} datos={cadaPerfil}/>)}
-
-
-
-</div>
-
-</div>
-
-</>
-
-    )
-
-
-
-
-
+function filterSearch(array) {
+    if (searchId.current.value !== '') {
+        let ciudadesFiltradas = array.filter((ciudad) => ciudad.name.toLowerCase().includes(searchId.current.value.toLowerCase()))
+        return ciudadesFiltradas
+    } else {
+        return array
     }
+}
+return (
+    <div className="cities-container flex m-t-16">
+        <form className="category-container flex column bg-palette2 p-2 gap-2 text-white w-20 h-50" method="get">
+            <label>
+                <input className="search-input w-100" type="search" name="search" id="search" placeholder="Search" ref={searchId} onChange={filterCheckCards} />
+            </label>
+
+            {checkCiudades.map((continente, index) => {
+                return <Checkbox continent={continente} valor={continente} fx={filterCheckCards} key={index} />
+              })}
+          </form>
+
+          <div className="cards-container container-fluid w-90 flex wrap gap-2 justify-center align-center">
+              {ciudadesFiltradas.length > 0 ? (
+                  ciudadesFiltradas.map((city, index) => {
+                      return <CityCard city={city} key={index} />
+                  }))
+                  : (
+                      <img className='img-fluid' width='100%' src="./img/notsearch.png" alt="Not Found Search" />
+                  )}
+          </div>
+      </div>
+  )
+
+
+
+
+
+
+
+}

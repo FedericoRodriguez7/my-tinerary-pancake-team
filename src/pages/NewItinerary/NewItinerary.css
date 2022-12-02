@@ -1,0 +1,37 @@
+.main-container-sign123214241421{
+    min-height: 100vh;
+    width: 100%;
+    background-color: #3E78B2;
+}
+
+
+
+.contenidoItinerary123{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+
+.contenido12312421{
+    width: 30rem;
+    height:  45rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: auto;
+    gap: 3rem;
+    background-color: #004BA8;;
+}
+
+.tituloitinerarios123123{
+    height: 40rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2cm;
+
+}

@@ -28,7 +28,7 @@ export default function CardHotel({ datos }) {
                 </div>
 
                 {dataHotels.map( everyHotel =>
-                <LinkRouter to={`/Hotels/${everyHotel.id}`} key={everyHotel.id}>
+                <LinkRouter to={`/Hotels/${everyHotel._id}`} key={everyHotel._id}>
                   <div className='botonCard2'  >
                     <button>More</button>
                    </div>  

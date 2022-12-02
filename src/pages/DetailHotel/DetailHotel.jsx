@@ -1,50 +1,77 @@
-import './DetailHotel.css'
-import { HotelDetail2 } from "../../components/HotelDetail2/HotelDetail2";
-import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import ShowsDetails from "../../components/ShowsDetails/ShowsDetails";
-import CardShow from "../../components/CardShow/CardShow";
+import React from 'react'
+import "./DetailHotel.css"
+import { useParams } from 'react-router';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import { BASE_URL } from '../../api/url';
+import CardDetails from '../../components/CardDetails2/CardDetails2';
 
-export const DetailHotel = () => {
+export default function DetailHotel() {
+    const { id } = useParams()
 
-    let [hotel, setHotel] = useState([])
+    const [detailCards, setDetailCards] = useState([])
+    const [events, setEvents] = useState([])
+
     
 
-    let { id } = useParams();
-  
-
-
     useEffect(() => {
-      fetch("/dataHotel.json")
-        .then((res) => res.json())
-        .then((res) => setHotel(res.find((e) => e.id === id)));
-  
-  
-      // eslint-disable-next-line
-    }, []);
+        axios.get(`${BASE_URL}/api/hotels/${id}`)
+            .then(res => setDetailCards(res.data.data))
 
-    console.log(id);
-    return (
-        <>
+        axios.get(`${BASE_URL}/api/shows?hotelId=${id}`)
+            .then(res => setEvents(res.data.data))
+        // eslint-disable-next-line
+    }, [])
+
+    console.log(events)
 
 
-<div className="CONTENEDOR-PADRE">
-<HotelDetail2 name={hotel.name} photo={hotel.photo} capacity={hotel.capacity} />
-        </div>
-        <div className="CONTENEDORINFERIOR34">
-      <ShowsDetails className="NOSEEEE" id={hotel.id} ></ShowsDetails>
-      <div className="ComentariosBoton">
-     <button>View Comments</button>
-     </div>
-      </div>
+    
 
-</>
+    if (detailCards.length !== 0) {
+        return (
+            <div className='CONTENEDORMAYOR1234124'>
+              <div className='PARTESUPERIOR123213'>
+                <h2>DETAILS </h2>
 
+              </div>
+                
+                <div className="card-detail323423423">
+                    <div className="img-card1231231312">
+                    <img className="" src={detailCards.photo[0]} alt= {detailCards.name} />
+                    </div>
+                    <div className="text-card-detail flex column justify-center align-center bg-palette1 text-white gap-2 p-1">
+                        <div className="logo-details">
+                            <img className="img-w-5" src="./img/building1.png" alt="" />
+                        </div>
+                        <div className="conenido-card123123123">
+                            <h1>{detailCards.name}</h1>
+                            <p>{detailCards.capacity}</p>
+                        </div>
+                        
+                        
+                    </div>
+                </div>
+                <div className='parteInferior'>
+                  <h2>EVENTS</h2>
+                </div>
+                <div className='cajadeEeventos'>
 
+                {
+            (events.length!=0)?events.map(e=><CardDetails key={e?._id} name={e?.name} photo={e?.photo} description={e?.description} price={e?.price} duration={e?.duration} />):console.log(true)
+        }
+          
+                </div>
 
+                <div className='botoncito12321'>
+                  <button>
+                    <p>Comment</p>
+                  </button>
+                </div>
+            </div>
+                
+            
+        )
+    }
 
-
-
-
-    )
 }

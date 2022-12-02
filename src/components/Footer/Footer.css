@@ -12,7 +12,7 @@
   }
   .FooterContainer{
     display: flex;
-    background-color: var(--expression);
+    background-color: var(--live);
     justify-content:space-around;
     min-height: 10vh;
   }

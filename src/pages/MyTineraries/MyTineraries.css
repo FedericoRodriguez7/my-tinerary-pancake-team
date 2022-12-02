@@ -1,0 +1,36 @@
+.CONTENEDOR-PADRRES123213213123123{
+    background-color: #3E78B2;
+    min-height: 100vh;
+}
+
+.cities-container12321421421214{
+    height: 30rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2cm;
+    min-height: 100vh;
+}
+
+
+.cards-container12321321321321{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    min-height: 100vh;
+    width: 100%;
+
+
+}
+
+
+.Mytinerary123124214{
+
+    height: 30rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2cm;
+
+}

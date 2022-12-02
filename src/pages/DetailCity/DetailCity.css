@@ -1,29 +1,82 @@
 .CONTENEDOR-PADRE{
     width: 100%;
     min-height: 100vh;
-display: flex;
-justify-content: center;
-align-items: center;
+    background-color: #3E78B2;
 }
 
 
-.CONTENEDORINFERIOR3{
-    
-    display: flex;
-    min-height: 100vh;
-    width: 100%;
-    flex-wrap: wrap;
-}
-.CONTENEDORINFERIOR3 button{
-    height: 75px;
-    width: 150px;
-}
 
-.ComentariosBoton{
+
+.contenedor-details{
     
     width: 100%;
+    height: 30rem;
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: 2cm;
 
+}
+
+
+.detail-cities{
+    
+    display: flex;
+    height:  50rem;
+    justify-content: center;
+    align-items: center;
+
+
+}
+
+.img-detail{
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   height: 50rem;
+   width: 50rem;
+}
+
+.img-detail img{
+    height: 70%;
+    width: 70%;
+    border-radius: 4rem;
+}
+
+
+.text-detail{
+    
+    width: 50rem;
+    height: 50rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: xx-large;
+    flex-direction: column;
+}
+
+
+
+.parteInferior{
+    border: 4px solid blue;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 8rem;
+    font-size: xx-large;
+}
+
+
+
+.botoncito12321{
+    
+    justify-content: center;
+    align-items: center;
+}
+
+.botoncito12321 button{
+    height: 40px;
+    width: 80px;
 }

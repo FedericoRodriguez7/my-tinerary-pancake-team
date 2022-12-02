@@ -34,6 +34,24 @@
   background-color: var(--live);
   color: var(--lighter);
 }
+
+
+.bottonregistrarse1234123{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.botongoogle123213{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+
+
 @media screen and (max-width:573px){
   .card-signup{
     margin-top: 350px;

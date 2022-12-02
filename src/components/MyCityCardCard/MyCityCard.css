@@ -1,0 +1,21 @@
+.prueba123432123{
+    
+    display: flex;
+    justify-content: center;
+}
+
+
+
+
+.option-mycities-edit{
+    border: 1px solid lightblue;
+    height: 4rem;
+    cursor: pointer;
+}
+
+
+.option-mycities-delet{
+    height: 4rem;
+    border: 1px solid blue;
+    cursor: pointer;
+}

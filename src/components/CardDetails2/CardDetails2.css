@@ -1,0 +1,30 @@
+
+
+.cards22{
+    
+    display: flex;
+    justify-content: center;
+    padding: 15px;
+}
+
+.cards22 img{
+    border-radius: 2rem;
+    height: 40rem;
+    width: 40rem;
+}
+
+.ContenidoDetalles2{
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-size: xx-large;
+    padding-left: 15px;
+
+}
+
+.ContenidoDetalles2 h3{
+    font-size: xx-large;
+
+}

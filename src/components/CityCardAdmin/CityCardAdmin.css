@@ -1,0 +1,36 @@
+.YAAAA123{
+    background-color: #004BA8;
+    width: 18rem;
+    height: 30rem;
+display: flex;
+flex-direction: column;
+}
+
+
+.YAAAA123 img{
+height: 100%;
+width: 100%;
+}
+
+
+.img-card-container123{
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10rem;
+}
+
+
+.botonesfinales23123123{
+    
+    height: 10rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.botonesfinales23123123 button{
+    height: 50px;
+    width: 50px;
+}

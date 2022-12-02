@@ -1,0 +1,72 @@
+:root {
+    --lighter: #FFFFFF;
+    --main: #3E78B2;
+    --expression: #004BA8;
+    --strong: #4A525A;
+    --live: #07070A;
+}
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+.card-container123{
+    
+    width: 20 rem;
+    background-color: var(--lighter);
+    color: var(--live);
+    margin: 15px;
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+    
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0px 1px 10px rgba(0,0,0,0.2);
+    cursor: default;
+    transition: all 400ms ease;
+}
+.card-container123:hover{
+    box-shadow: 5px 5px 20px rgba(0,0,0,0.4);
+    transform: translateY(-2%);
+}
+
+.card-container123 img{
+    height: 200px;
+    width: 100%;
+    border-radius: 5px;
+}
+
+.text-card{
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-size: x-large;
+    
+    
+}
+
+.botoncito12321{
+   
+    height: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    margin-top: 10px;
+    
+
+}
+
+
+.more{
+    height: 50px;
+    width: 70px;
+    border-radius: 4px;
+    transition: all 400ms ease;
+}
+.more:hover{
+    background-color: var(--live);
+    color: var(--lighter);
+}
